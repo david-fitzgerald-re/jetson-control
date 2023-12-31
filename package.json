@@ -33,6 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@azure/service-bus": "^7.9.3"
+		"@azure/service-bus": "^7.9.3",
+		"azure-iothub": "^1.16.4"
 	}
 }

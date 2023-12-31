@@ -1,0 +1,6 @@
+azure-servicebus
+loguru
+pydantic
+pydantic-settings
+starlette
+uvicorn[standard]

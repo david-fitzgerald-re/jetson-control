@@ -1,9 +1,9 @@
+# TODO avoid annoying path manipulation
 import sys
 from pathlib import Path
-
-current_dir = Path(__file__).resolve().parent
-parent_dir = current_dir.parent
+parent_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(parent_dir))
+
 from starlette.applications import Starlette
 from starlette.routing import WebSocketRoute
 import uvicorn

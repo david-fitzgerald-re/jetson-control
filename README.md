@@ -1,38 +1,41 @@
-# create-svelte
+# Description
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+# Requirements
 
-## Creating a project
+- `node` - `v18.19.0`
+- `python` - `3.11`
 
-If you're seeing this, you've probably already done this step. Congrats!
+# Quickstart
+
+To install backend requirements:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To install frontend requirements:
 
 ```bash
-npm run dev
+npm install
+```
 
-# or start the server and open the app in a new browser tab
+To run the backend application:
+
+```bash
+python backend/app.py
+```
+
+To run the frontend application:
+
+```bash
 npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
+To update required properties from `config-manager`:
 
 ```bash
-npm run build
+docker exec -it config-manager bash
+/app/entrypoint.sh
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
