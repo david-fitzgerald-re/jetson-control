@@ -1,15 +1,22 @@
-# Description
+# Receiving Device Updates
 
-# Requirements
+Test
+
+## Description
+
+Test
+
+## Requirements
 
 - `node` - `v18.19.0`
 - `python` - `3.11`
 
-# Quickstart
+## Quickstart
 
 To install backend requirements:
 
 ```bash
+cd backend
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -18,18 +25,21 @@ pip install -r requirements.txt
 To install frontend requirements:
 
 ```bash
+cd frontend
 npm install
 ```
 
 To run the backend application:
 
 ```bash
-python backend/app.py
+cd backend
+python app.py
 ```
 
 To run the frontend application:
 
 ```bash
+cd frontend
 npm run dev -- --open
 ```
 

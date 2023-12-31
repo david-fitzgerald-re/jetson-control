@@ -1,6 +1,9 @@
 <script>
     import { onMount } from "svelte";
+    import ColourSelector from "$lib/components/ColourSelector.svelte";
 
+    // data automatically comes from the load 
+    // function in +page.server.js
     export let data;
 
     let socket;
@@ -22,7 +25,13 @@
     })
 </script>
 
-<div>
+<style>
+    .container {
+        padding: 1rem;
+    }
+</style>
+
+<div class="container">
     <h1>Device State <code>orin03-dev</code></h1>
     <p>Colour: <b>{colour}</b></p>
     <h2>WebSocket Messages</h2>
@@ -38,3 +47,5 @@
         {/each}
     </ul>
 </div>
+
+<ColourSelector currentColour={colour}/>

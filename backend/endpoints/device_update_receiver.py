@@ -9,7 +9,10 @@ from backend.event_queue import SENTINEL
 from backend import events
 
 
-class DeviceUpdateEndpoint(WebSocketEndpoint):
+class DeviceUpdateReceiverEndpoint(WebSocketEndpoint):
+    """
+    TODO
+    """
     def __init__(self, scope: Scope, receive: Receive, send: Send) -> None:
         self.forward_task = None
         super().__init__(scope, receive, send)
@@ -30,9 +33,6 @@ class DeviceUpdateEndpoint(WebSocketEndpoint):
         await self.forward_task
 
         logger.info("Client disconnected")
-    
-    async def on_receive(self, websocket: WebSocket, data: Any) -> Coroutine[Any, Any, None]:
-        logger.info(f"Received message from client: {data}")
 
     async def forward(self, websocket: WebSocket):
         queue = events.subscribe()
@@ -46,7 +46,7 @@ class DeviceUpdateEndpoint(WebSocketEndpoint):
                     break
         except asyncio.CancelledError:
             logger.info("Stopping forwarding messages to client")
-        except Exception as err:
+        except Exception:
             raise
         finally:
             events.unsubscribe(queue)

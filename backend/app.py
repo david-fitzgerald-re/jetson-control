@@ -5,10 +5,10 @@ parent_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(parent_dir))
 
 from starlette.applications import Starlette
-from starlette.routing import WebSocketRoute
+from starlette.routing import WebSocketRoute, Route
 import uvicorn
 from backend import events
-from backend.endpoint import DeviceUpdateEndpoint
+from backend.endpoints import DeviceUpdateReceiverEndpoint, DeviceUpdateSenderEndpoint
 
 
 async def lifespan(app: Starlette):
@@ -22,7 +22,8 @@ async def lifespan(app: Starlette):
 
 
 routes=[
-    WebSocketRoute("/ws", endpoint=DeviceUpdateEndpoint)
+    WebSocketRoute("/ws", endpoint=DeviceUpdateReceiverEndpoint),
+    Route("/ping", endpoint=DeviceUpdateSenderEndpoint)
 ]
 
 

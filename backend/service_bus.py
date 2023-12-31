@@ -1,11 +1,15 @@
 import json
-from azure.servicebus.aio import ServiceBusClient, ServiceBusReceiver
+from typing import Any, AsyncGenerator
+from azure.servicebus.aio import ServiceBusClient
 from azure.servicebus import ServiceBusReceivedMessage, ServiceBusReceiveMode
 from azure.servicebus.exceptions import MessagingEntityNotFoundError
 from loguru import logger
 
 
-async def receive(conn_str: str, topic: str, subscription: str):
+Message = dict[str, Any]
+
+
+async def receive(conn_str: str, topic: str, subscription: str) -> AsyncGenerator[Message, Any]:
     try:
         servicebus_client = ServiceBusClient.from_connection_string(
             conn_str=conn_str,
@@ -43,32 +47,9 @@ async def receive(conn_str: str, topic: str, subscription: str):
         raise
     except Exception:
         raise
-
-
-async def receiver(servicebus_client: ServiceBusClient, queue: str) -> ServiceBusReceiver:
-    try:
-        return servicebus_client.get_queue_receiver(
-                queue_name=queue,
-            )
-    except Exception:
-        logger.exception("Failed to get queue receiver")
-            # TODO proper error handling
-        raise
-
-
-def authenticate(conn_str) -> ServiceBusClient:
-    try:
-        return ServiceBusClient.from_connection_string(
-            conn_str=conn_str,
-            logging_enable=True,
-        )
-    except Exception:
-        logger.exception("Failed to create the service bus client")
-        # TODO proper error handling
-        raise
         
 
-def parse_message(msg: ServiceBusReceivedMessage):
+def parse_message(msg: ServiceBusReceivedMessage) -> Message:
     body = str(msg.message)
     application_properties={key.decode(): val.decode() for key, val in msg.application_properties.items()}
     message_id = msg._raw_amqp_message.properties.message_id.decode()

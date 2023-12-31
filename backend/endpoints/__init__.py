@@ -1,0 +1,2 @@
+from backend.endpoints.device_update_receiver import DeviceUpdateReceiverEndpoint
+from backend.endpoints.device_update_sender import DeviceUpdateSenderEndpoint
