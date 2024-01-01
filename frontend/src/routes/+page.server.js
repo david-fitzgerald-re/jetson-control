@@ -49,6 +49,22 @@ export const actions = {
         const data = await request.formData();
         const jsonData = Object.fromEntries(data)
         const colour = data.get("colour")
+        const etag = data.get("etag")
+
+        const twinPatch = {
+            properties: {
+                desired: {
+                    colour: colour
+                }
+            }
+        }
+
+        registry.updateModuleTwin(
+            IOTHUB_DEVICE_ID,
+            IOTHUB_MODULE_ID,
+            twinPatch,
+            etag
+        )
     
         console.log(`jsonData: ${JSON.stringify(jsonData)}`)
         console.log(`Chosen colour ${colour}`)
@@ -70,8 +86,9 @@ async function fetchTwin() {
         IOTHUB_DEVICE_ID,
         IOTHUB_MODULE_ID,
     )
-    const properties = twin.responseBody.properties
-    console.log('Module twin properties retrieved:', properties);
+    let twin = result.responseBody
 
-    return properties;
+    console.log('Module twin retrieved:', twin);
+
+    return twin.toJSON();
 }

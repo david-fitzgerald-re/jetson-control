@@ -11,12 +11,12 @@
         // TODO - remove this
         // Just to simulate delay of getting the twin
         twinStore.set(data.props.twinProperties)
-    }, 5000)
+    }, 3000)
 
     let socket;
     $: messages = [];
     // $: colour = data.props.twinProperties.reported.colour
-    $: colour = $twinStore.reported.colour
+    $: colour = $twinStore.properties.reported.colour
 
     async function handleMessage(event) {
         console.log(event)
@@ -46,7 +46,7 @@
 
 <div class="container">
     <h1 class="text-2xl font-bold mb-4">Device State <code>orin03-dev</code></h1>
-    <ColourSelector currentColour={colour}/>
+    <ColourSelector currentColour={colour} etag="tmp"/>
     <!-- <p>Colour: <b>{colour}</b></p> -->
     <h2>Current Twin</h2>
     <p>{JSON.stringify($twinStore)}</p>

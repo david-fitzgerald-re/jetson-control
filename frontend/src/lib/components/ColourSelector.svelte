@@ -3,6 +3,7 @@
 	import toast, { Toaster } from 'svelte-french-toast';
 
 	export let currentColour = 'unknown';
+	export let etag = "";
 	let selectedColour = 'red'; // Default selected color
 	const colors = ['red', 'blue'];
 
@@ -74,6 +75,7 @@
 					{/each}
 				</select>
 			</div>
+			<input bind:value={etag} type="hidden"/>
 			<button on:click={handleSubmit} class="submit-btn mt-4">Submit</button>
 		</div>
 	</form>
