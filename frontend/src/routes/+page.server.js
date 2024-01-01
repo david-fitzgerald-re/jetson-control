@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/private'
 import pkg from 'azure-iothub';
 const { Registry } = pkg;
 import { fail } from '@sveltejs/kit';
+import * as Types from "$lib/types.js"
 
 const CONN_STRING = env.DEV_IOTHUB_CONNECTION_STRING
 const IOTHUB_DEVICE_ID = env.IOTHUB_DEVICE_ID;
@@ -61,6 +62,9 @@ export const actions = {
 }
 
 
+/**
+ * @returns {Types.Twin}
+ */
 async function fetchTwin() {
     const result = await registry.getModuleTwin(
         IOTHUB_DEVICE_ID,

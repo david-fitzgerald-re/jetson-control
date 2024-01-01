@@ -1,26 +1,36 @@
 import { writable } from "svelte/store";
+import * as Types from "$lib/types.js"
 
 /**
- * @typedef {Object} Twin
- * @property {Object.<string, any>} reported - The reported properties
- * @property {Object.<string, any>} desired - The desired properties
- */
-
-
-/**
- * @type {Twin}
+ * @type {Types.Twin}
  */
 const initialTwinState = {
   // TODO - this would possibly use a schema of the twin?
-  desired: {
-    colour: "unknown"
+  deviceId: "",
+  moduleId: "",
+  etag: "",
+  deviceEtag: "",
+  status: "",
+  statusUpdateTime: "",
+  connectionState: "",
+  lastActivityTime: "",
+  cloudToDeviceMessageCount: "",
+  authenticationType: "",
+  x509Thumbprint: {
+    primaryThumbprint: "",
+    secondaryThumbprint: "",
   },
-  reported: {
-    colour: "unknown"
+  modelId: "",
+  version: NaN,
+  properties: {
+    desired: {
+      colour: "unknown"
+    },
+    reported: {
+      colour: "unknown"
+    }
   }
 }
-
-// { reported: { [key: string]: any; }; desired: { [key: string]: any; }; }
 
 let currentTwin = writable(initialTwinState)
 
