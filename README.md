@@ -49,3 +49,11 @@ To update required properties from `config-manager`:
 docker exec -it config-manager bash
 /app/entrypoint.sh
 ```
+
+# Notes
+
+Anecdotadally, it regularly takes about 7 seconds for reported properties to 
+get sent from the device through an azure service bus and into this app. It goes
+without saying that this time can vary greatly and azure even document this 
+themselves. If a device is disconnected we would not receive the reported properties
+until the next time the device connects.
