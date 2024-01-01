@@ -2,15 +2,16 @@
     import { onMount } from "svelte";
     import ColourSelector from "$lib/components/ColourSelector.svelte";
     import twinStore from "$lib/twin.js";
-	import { stringify } from "postcss";
-    // data automatically comes from the load 
+
+    // "data" automatically comes from the load 
     // function in +page.server.js
     export let data;
 
     setTimeout(() => {
-        // Just to simulate delay to get the twin
+        // TODO - remove this
+        // Just to simulate delay of getting the twin
         twinStore.set(data.props.twinProperties)
-    }, 1000)
+    }, 5000)
 
     let socket;
     $: messages = [];
