@@ -130,7 +130,7 @@ venv.bak/
 .DS_Store
 node_modules
 /build
-/.svelte-kit
+.svelte-kit
 /package
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
