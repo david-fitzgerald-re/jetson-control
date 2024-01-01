@@ -1,0 +1,14 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+@layer base {
+  h1 {
+    @apply text-2xl mt-3 mb-3;
+  }
+  h2 {
+    @apply text-xl mt-3 mb-3;
+  }
+  /* ... */
+}

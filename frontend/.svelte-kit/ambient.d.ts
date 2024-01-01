@@ -33,8 +33,8 @@ declare module '$env/static/private' {
 	export const NODE: string;
 	export const INIT_CWD: string;
 	export const _P9K_TTY: string;
-	export const PYENV_ROOT: string;
 	export const NVM_CD_FLAGS: string;
+	export const PYENV_ROOT: string;
 	export const TERM: string;
 	export const SHELL: string;
 	export const HOMEBREW_REPOSITORY: string;
@@ -84,8 +84,8 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const XPC_SERVICE_NAME: string;
 	export const VSCODE_INJECTION: string;
-	export const SHLVL: string;
 	export const PYENV_SHELL: string;
+	export const SHLVL: string;
 	export const HOME: string;
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const HOMEBREW_PREFIX: string;
@@ -99,8 +99,8 @@ declare module '$env/static/private' {
 	export const npm_config_user_agent: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const GIT_ASKPASS: string;
-	export const HOMEBREW_CELLAR: string;
 	export const INFOPATH: string;
+	export const HOMEBREW_CELLAR: string;
 	export const _P9K_SSH_TTY: string;
 	export const DISPLAY: string;
 	export const VSCODE_ENV_REPLACE: string;
@@ -147,8 +147,8 @@ declare module '$env/dynamic/private' {
 		NODE: string;
 		INIT_CWD: string;
 		_P9K_TTY: string;
-		PYENV_ROOT: string;
 		NVM_CD_FLAGS: string;
+		PYENV_ROOT: string;
 		TERM: string;
 		SHELL: string;
 		HOMEBREW_REPOSITORY: string;
@@ -198,8 +198,8 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		XPC_SERVICE_NAME: string;
 		VSCODE_INJECTION: string;
-		SHLVL: string;
 		PYENV_SHELL: string;
+		SHLVL: string;
 		HOME: string;
 		VSCODE_GIT_ASKPASS_MAIN: string;
 		HOMEBREW_PREFIX: string;
@@ -213,8 +213,8 @@ declare module '$env/dynamic/private' {
 		npm_config_user_agent: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
 		GIT_ASKPASS: string;
-		HOMEBREW_CELLAR: string;
 		INFOPATH: string;
+		HOMEBREW_CELLAR: string;
 		_P9K_SSH_TTY: string;
 		DISPLAY: string;
 		VSCODE_ENV_REPLACE: string;

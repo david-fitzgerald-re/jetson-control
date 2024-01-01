@@ -8,14 +8,14 @@ const DEVICE_ID = "orin03-dev"
 const MODULE_ID = "config-manager"
 
 
-/** @type {import('@sveltejs/kit').Load} */
+/** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-    const serverData = await fetchTwin();
+    const twinProperties = await fetchTwin();
 
     // Return data that will be passed to the page component
     return {
         props: {
-            serverData,
+            twinProperties,
         },
     };
 }
