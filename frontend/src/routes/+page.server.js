@@ -4,8 +4,22 @@ const { Registry } = pkg;
 import { fail } from '@sveltejs/kit';
 
 const CONN_STRING = env.DEV_IOTHUB_CONNECTION_STRING
-const DEVICE_ID = "orin03-dev"
-const MODULE_ID = "config-manager"
+const IOTHUB_DEVICE_ID = env.IOTHUB_DEVICE_ID;
+const IOTHUB_MODULE_ID = env.IOTHUB_MODULE_ID;
+
+
+if (!CONN_STRING) {
+    throw new Error("DEV_IOTHUB_CONNECTION_STRING is not set")
+}
+if (!IOTHUB_DEVICE_ID) {
+    throw new Error("IOTHUB_DEVICE_ID is not set")
+}
+if (!IOTHUB_MODULE_ID) {
+    throw new Error("IOTHUB_MODULE_ID is not set")
+}
+
+
+const registry = Registry.fromConnectionString(CONN_STRING)
 
 
 /** @type {import('./$types').PageServerLoad} */
@@ -48,10 +62,9 @@ export const actions = {
 
 
 async function fetchTwin() {
-    const registry = Registry.fromConnectionString(CONN_STRING)
-    const twin = await registry.getModuleTwin(
-        DEVICE_ID,
-        MODULE_ID,
+    const result = await registry.getModuleTwin(
+        IOTHUB_DEVICE_ID,
+        IOTHUB_MODULE_ID,
     )
     const properties = twin.responseBody.properties
     console.log('Module twin properties retrieved:', properties);

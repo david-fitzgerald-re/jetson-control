@@ -13,6 +13,8 @@ Test
 
 ## Quickstart
 
+TODO - explain how to populate `.env`
+
 To install backend requirements:
 
 ```bash
