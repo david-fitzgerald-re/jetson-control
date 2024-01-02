@@ -22,7 +22,7 @@ async def receive(conn_str: str, topic: str, subscription: str) -> AsyncGenerato
     
     try:
         
-        # TODO - maybe switch back to subscription instead of queue?
+        # TODO - maybe switch back to subscription topic instead of queue?
         # receiver = servicebus_client.get_subscription_receiver(
         #     topic_name=topic,
         #     subscription_name=subscription,
