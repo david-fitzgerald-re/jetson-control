@@ -49,13 +49,6 @@ export const actions = {
         const data = await request.formData();
         const jsonData = Object.fromEntries(data)
         const colour = data.get("colour")
-        const etag = String(data.get("etag"))
-
-        if (!etag) {
-            return fail(400, "etag cannot be empty")
-        }
-
-        console.log(`etag is ${etag}`)
 
         const twinPatch = {
             properties: {
@@ -64,15 +57,24 @@ export const actions = {
                 }
             }
         }
+        // We must retrieve the latest twin to get its etag
+        // See here for details: https://learn.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-device-twins#optimistic-concurrency
+        let twin = await fetchTwin()
+
         try {
-            registry.updateModuleTwin(
+            await registry.updateModuleTwin(
                 IOTHUB_DEVICE_ID,
                 IOTHUB_MODULE_ID,
                 twinPatch,
-                etag,
+                twin.etag,
             )
-        } catch (error) {
-            console.log("Failed to update module twin")
+        } catch (err) {
+            if (err instanceof Error && err.name == "InvalidEtagError") {
+                return fail(400, {"error": "Failed to update module twin: timing issue related to etag"})
+            } else {
+                console.log(`Unexpected error: ${err}`)
+                return fail(500, {"error": "Failed to update module twin: unexpected server error"})
+            }
         }
     
         console.log(`jsonData: ${JSON.stringify(jsonData)}`)
@@ -84,7 +86,7 @@ export const actions = {
 
 
 /**
- * @returns {Types.Twin}
+ * @returns {Promise<Types.Twin>}
  */
 async function fetchTwin() {
     const result = await registry.getModuleTwin(

@@ -4,8 +4,6 @@
     import twin from "$lib/twin.js";
 
 	$: currentColour = $twin.properties.reported.colour;
-	$: etag = $twin.etag;
-	console.log(`etag is ${etag}`)
 	let selectedColour = 'red'; // Default selected color
 	const colors = ['red', 'blue'];
 
@@ -77,7 +75,6 @@
 					{/each}
 				</select>
 			</div>
-			<input bind:value={etag} name="etag"/> <!--  type="hidden" -->
 			<button on:click={handleSubmit} class="submit-btn">Submit</button>
 		</div>
 	</form>
@@ -94,7 +91,7 @@
 
 	.table {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
 		gap: 1rem;
 	}
 
