@@ -7,11 +7,7 @@
     // function in +page.server.js
     export let data;
 
-    setTimeout(() => {
-        // TODO - remove this
-        // Just to simulate delay of getting the twin
-        twin.set(data.props.twin)
-    }, 3000)
+    twin.set(data.props.twin)
 
     let socket;
     $: messages = [];
