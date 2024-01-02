@@ -61,33 +61,24 @@
     pre {
         border: none;
     }
-    .operative { font-weight: bold; border: 1px solid yellow; }
-    /* #quine { border: 4px solid #88c; } */
 </style>
 
 <div class="container">
-    <h1 class="text-2xl font-bold mb-4">Device State <code>orin03-dev</code></h1>
+    <h1>Device State <code>orin03-dev</code></h1>
     <ColourSelector/>
-    <!-- <p>Colour: <b>{colour}</b></p> -->
-    <h2>Current Twin</h2>
 
-    <div class="scroll-container" id="quine">
+    <h2>Current Twin</h2>
+    <div class="scroll-container">
         <pre>{JSON.stringify($twin, null, 2)}</pre>
     </div>
-    <h2>Etag</h2>
-    <pre><code>{$twin.etag}</code></pre>
-    <h2>WebSocket Messages</h2>
 
-    <ul>
+    <h2>WebSocket Messages</h2>
+    <ol class="scroll-container">
         {#each messages as message (message.id)}
-            <li>
-                <ul>
-                    <li class="message">
-                        <pre>{JSON.stringify(message, null, 2)}</pre>
-                    </li>
-                </ul>
+            <li class="message">
+                <pre>{JSON.stringify(message, null, 2)}</pre>
             </li>
         {/each}
-    </ul>
+    </ol>
 </div>
 
