@@ -5,10 +5,13 @@
 
 @layer base {
   h1 {
-    @apply text-2xl pt-3 pb-3;
+    @apply text-2xl py-3;
   }
   h2 {
-    @apply text-xl pt-3 pb-3;
+    @apply text-xl py-5;
+  }
+  h3 {
+    @apply text-lg pb-2;
   }
   /* ... */
 }

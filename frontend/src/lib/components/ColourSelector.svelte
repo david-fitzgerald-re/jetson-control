@@ -66,12 +66,13 @@
 		<div class="table">
 			<div class="cell">Colour</div>
 			<div class="cell disabled">{currentColour}</div>
-			<div class="cell">
-				<select bind:value={selectedColour} name="colour" class="w-full">
+			<div class="cell select">
+				<select bind:value={selectedColour} name="colour" class="w-full select">
 					{#each colors as color}
 						<option value={color}>{color}</option>
 					{/each}
 				</select>
+
 			</div>
 			<button on:click={handleSubmit} class="submit-btn">Submit</button>
 		</div>
@@ -103,6 +104,12 @@
 	.disabled {
 		background-color: #f2f2f2;
 		color: #777;
+		cursor: not-allowed
+	}
+	
+	.select {
+		cursor: pointer;
+		outline: none;
 	}
 
 	.submit-btn {
