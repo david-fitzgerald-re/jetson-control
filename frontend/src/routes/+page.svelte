@@ -47,6 +47,22 @@
     .container {
         padding: 1rem;
     }
+    
+    /* TODO understand how to syntax highlight @apply from tailwind  */
+    .message {
+        @apply mb-3 ;
+    }
+
+    .scroll-container {
+        border: 1px solid lightgrey;
+        @apply h-96 overflow-y-auto;
+    }
+
+    pre {
+        border: none;
+    }
+    .operative { font-weight: bold; border: 1px solid yellow; }
+    /* #quine { border: 4px solid #88c; } */
 </style>
 
 <div class="container">
@@ -54,15 +70,21 @@
     <ColourSelector/>
     <!-- <p>Colour: <b>{colour}</b></p> -->
     <h2>Current Twin</h2>
-    <p>{JSON.stringify($twin)}</p>
+
+    <div class="scroll-container" id="quine">
+        <pre>{JSON.stringify($twin, null, 2)}</pre>
+    </div>
+    <h2>Etag</h2>
+    <pre><code>{$twin.etag}</code></pre>
     <h2>WebSocket Messages</h2>
-    
+
     <ul>
-        {#each messages as { id, body, application_properties} (id)}
+        {#each messages as message (message.id)}
             <li>
                 <ul>
-                    <li>{JSON.stringify(body)}</li>
-                    <li>{JSON.stringify(application_properties)}</li>
+                    <li class="message">
+                        <pre>{JSON.stringify(message, null, 2)}</pre>
+                    </li>
                 </ul>
             </li>
         {/each}

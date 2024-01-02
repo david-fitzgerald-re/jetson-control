@@ -55,13 +55,13 @@
 						toast.success('Success');
 						break;
 					case 'failure':
-						toast.error('Failed');
+						toast.error('Failed to update twin desired properties');
 						cancel()
 						break;
 					default:
 						break;
 				}
-				await update({ invalidateAll: false });
+				await update({ invalidateAll: false, reset: false });
 				// `result` is an `ActionResult` object
 				// `update` is a function which triggers the default logic that would be triggered if this callback wasn't set
 			};
@@ -78,7 +78,7 @@
 				</select>
 			</div>
 			<input bind:value={etag} name="etag"/> <!--  type="hidden" -->
-			<button on:click={handleSubmit} class="submit-btn mt-4">Submit</button>
+			<button on:click={handleSubmit} class="submit-btn">Submit</button>
 		</div>
 	</form>
 </div>
@@ -94,7 +94,7 @@
 
 	.table {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 		gap: 1rem;
 	}
 
@@ -102,6 +102,7 @@
 		padding: 1rem;
 		border: 1px solid #ddd;
 		border-radius: 0.25rem;
+		min-width: 6rem;
 	}
 
 	.disabled {
