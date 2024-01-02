@@ -4,6 +4,10 @@ from starlette.responses import JSONResponse
 from starlette.requests import Request
 
 
+# TODO - possibly get rid of this file as we are sending 
+# the module twin update from the svelte server side atm
+
+
 class DeviceUpdateSenderEndpoint(HTTPEndpoint):
     def __init__(self, scope: Scope, receive: Receive, send: Send) -> None:
         super().__init__(scope, receive, send)
@@ -15,5 +19,4 @@ class DeviceUpdateSenderEndpoint(HTTPEndpoint):
         data = await request.json()
         colour = data["colour"]
         # TODO error handling
-        breakpoint()
         return JSONResponse({"message": "pong"}, status_code=200)

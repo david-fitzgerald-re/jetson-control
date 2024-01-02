@@ -1,9 +1,11 @@
 <script>
 	import { enhance } from '$app/forms';
 	import toast, { Toaster } from 'svelte-french-toast';
+    import twin from "$lib/twin.js";
 
-	export let currentColour = 'unknown';
-	export let etag = "";
+	$: currentColour = $twin.properties.reported.colour;
+	$: etag = $twin.etag;
+	console.log(`etag is ${etag}`)
 	let selectedColour = 'red'; // Default selected color
 	const colors = ['red', 'blue'];
 
@@ -75,7 +77,7 @@
 					{/each}
 				</select>
 			</div>
-			<input bind:value={etag} type="hidden"/>
+			<input bind:value={etag} name="etag"/> <!--  type="hidden" -->
 			<button on:click={handleSubmit} class="submit-btn mt-4">Submit</button>
 		</div>
 	</form>

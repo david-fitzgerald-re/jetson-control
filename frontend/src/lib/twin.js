@@ -32,6 +32,6 @@ const initialTwinState = {
   }
 }
 
-let currentTwin = writable(initialTwinState)
+let twin = writable(initialTwinState)
 
-export default currentTwin;
+export default twin;

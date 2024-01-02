@@ -25,12 +25,12 @@ const registry = Registry.fromConnectionString(CONN_STRING)
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-    const twinProperties = await fetchTwin();
+    const twin = await fetchTwin();
 
     // Return data that will be passed to the page component
     return {
         props: {
-            twinProperties,
+            twin,
         },
     };
 }
@@ -49,7 +49,13 @@ export const actions = {
         const data = await request.formData();
         const jsonData = Object.fromEntries(data)
         const colour = data.get("colour")
-        const etag = data.get("etag")
+        const etag = String(data.get("etag"))
+
+        if (!etag) {
+            return fail(400, "etag cannot be empty")
+        }
+
+        console.log(`etag is ${etag}`)
 
         const twinPatch = {
             properties: {
@@ -58,22 +64,21 @@ export const actions = {
                 }
             }
         }
-
-        registry.updateModuleTwin(
-            IOTHUB_DEVICE_ID,
-            IOTHUB_MODULE_ID,
-            twinPatch,
-            etag
-        )
+        try {
+            registry.updateModuleTwin(
+                IOTHUB_DEVICE_ID,
+                IOTHUB_MODULE_ID,
+                twinPatch,
+                etag,
+            )
+        } catch (error) {
+            console.log("Failed to update module twin")
+        }
     
         console.log(`jsonData: ${JSON.stringify(jsonData)}`)
         console.log(`Chosen colour ${colour}`)
         
-        if (Math.random() < 0.5) {
-            return fail(400)
-        } else {
-            return { success: true }
-        }
+        return { success: true }
     }
 }
 

@@ -54,6 +54,8 @@ def parse_message(msg: ServiceBusReceivedMessage) -> Message:
     application_properties={key.decode(): val.decode() for key, val in msg.application_properties.items()}
     message_id = msg._raw_amqp_message.properties.message_id.decode()
 
+    logger.info(f"Full received message: {body}")
+
     return {
         "body": json.loads(body),
         "application_properties": application_properties,
