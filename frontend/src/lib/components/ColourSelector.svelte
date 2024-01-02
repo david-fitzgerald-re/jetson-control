@@ -1,6 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
-	import toast, { Toaster } from 'svelte-french-toast';
+	import toast from 'svelte-french-toast';
     import twin from "$lib/twin.js";
 
 	$: currentColour = $twin.properties.reported.colour;
@@ -14,8 +14,6 @@
 	}
 </script>
 
-<!-- TODO move this somewhere better? -->
-<Toaster />
 
 <div class="container">
 	<form

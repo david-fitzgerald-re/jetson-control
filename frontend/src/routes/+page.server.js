@@ -96,6 +96,6 @@ async function fetchTwin() {
     let twin = result.responseBody
 
     console.log('Module twin retrieved:', twin);
-
+    
     return twin.toJSON();
 }
