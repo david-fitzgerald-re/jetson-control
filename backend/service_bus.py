@@ -40,6 +40,8 @@ async def receive(conn_str: str, topic: str, subscription: str) -> AsyncGenerato
         async for msg in receiver:
             # await receiver.complete_message(msg)
             message = parse_message(msg)
+            if message is None:
+                continue
             logger.debug(f"Received {message}")
             yield message
     except MessagingEntityNotFoundError as exc:
@@ -55,11 +57,22 @@ def parse_message(msg: ServiceBusReceivedMessage) -> Message:
     application_properties={key.decode(): val.decode() for key, val in msg.application_properties.items()}
     message_id = msg._raw_amqp_message.properties.message_id.decode()
 
-    logger.info(f"Full received message: {body}")
-
-    return {
+    message = {
         "body": json.loads(body),
         "application_properties": application_properties,
         "id": message_id,
     }
+    message_type = message["application_properties"].get("type")
+
+    if message_type in ("robot-heartbeat", "heartbeat"):
+        logger.debug(f"Discarding {message_type} message")
+        return None
+    
+    if (
+        message["application_properties"].get('moduleId') != 'config-manager'
+    ):
+        # breakpoint()
+        pass
+
+    return message
     
