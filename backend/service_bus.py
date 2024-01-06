@@ -42,10 +42,11 @@ async def receive(conn_str: str, topic: str, subscription: str) -> AsyncGenerato
             message = parse_message(msg)
             logger.debug(f"Received {message}")
             yield message
-    except MessagingEntityNotFoundError:
-        # TODO better error handling
+    except MessagingEntityNotFoundError as exc:
+        logger.exception(exc)
         raise
-    except Exception:
+    except Exception as exc:
+        logger.exception(exc)
         raise
         
 

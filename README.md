@@ -1,10 +1,10 @@
 # Receiving Device Updates
 
-Test
+TODO
 
 ## Description
 
-Test
+TODO
 
 ## Requirements
 
@@ -35,7 +35,7 @@ To run the backend application:
 
 ```bash
 cd backend
-python app.py
+uvicorn app:app --reload
 ```
 
 To run the frontend application:

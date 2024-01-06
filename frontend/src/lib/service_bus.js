@@ -1,5 +1,9 @@
 // lifted from: https://github.com/Azure/azure-sdk-for-js/blob/main/sdk/servicebus/service-bus/samples/v7/javascript/receiveMessagesLoop.js
 // TODO edit WIP commit
+// These could be useful for subscribing to messages in the svelte backend:
+// https://stackoverflow.com/questions/74330190/how-to-respond-with-a-stream-in-a-sveltekit-server-load-function/74336207#74336207
+// https://developer.mozilla.org/en-US/docs/Web/API/Streams_API
+// https://www.youtube.com/watch?v=dXsZp39L2Jk
 
 
 import { env } from '$env/dynamic/private'

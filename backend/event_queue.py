@@ -35,7 +35,7 @@ class EventQueue:
         await self.close()
 
     async def reader(self):
-        logger.info(f"Reading events from service bus topic {TOPIC}")
+        logger.info(f"Backend is reading events from service bus topic {TOPIC}")
 
         try:
             async for message in receive(
@@ -51,9 +51,10 @@ class EventQueue:
             logger.exception("Could not read from service bus")
             raise
         except Exception as err:
+            logger.exception(err)
             raise
         finally:
-            logger.info(f"Stopping reading from service bus topic {TOPIC}")
+            logger.info(f"Backend stopped reading from service bus topic {TOPIC}")
     
     def subscribe(self) -> asyncio.Queue:
         queue = asyncio.Queue()
