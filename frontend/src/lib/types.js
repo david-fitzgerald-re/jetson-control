@@ -27,6 +27,8 @@
  * @property {number} version - Integer
  * @property {TwinProperties} properties - The desired & reported properties
  * @property {TwinTags} tags
+ * 
+ * @typedef {Object.<string, any>} Message
  */
 
 export const Types = {}

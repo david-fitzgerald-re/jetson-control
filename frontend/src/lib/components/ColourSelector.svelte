@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import toast from 'svelte-french-toast';
-    import twin from "$lib/twin.js";
+    import twin from "$lib/stores/twin.js";
 
 	$: currentColour = $twin.properties.reported.colour;
 	let selectedColour = 'red'; // Default selected color
