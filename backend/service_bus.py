@@ -50,6 +50,37 @@ async def receive(conn_str: str, topic: str, subscription: str) -> AsyncGenerato
     except Exception as exc:
         logger.exception(exc)
         raise
+    # TODO it appears backend authentication timed out 
+    # after (I think) 24-48hrs. Need to make the front 
+    # end show an error if/when the backend disconnects.
+    # Might have to poll the event queue task to 
+"""
+2024-01-08 05:12:44.302 | DEBUG    | backend.service_bus:parse_message:68 - Discarding robot-heartbeat message
+Unexpected error occurred (TimeoutError('Authentication attempt timed-out.')). Handler shutting down.
+Traceback (most recent call last):
+  File "/Users/david/.pyenv/versions/3.11.4/lib/python3.11/site-packages/azure/servicebus/aio/_base_handler_async.py", line 269, in _do_retryable_operation
+    return await operation(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/david/.pyenv/versions/3.11.4/lib/python3.11/site-packages/azure/servicebus/aio/_transport/_pyamqp_transport_async.py", line 226, in iter_next_async
+    pyamqp_message = await cast(AsyncIterator["Message"], receiver._message_iter).__anext__()
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/david/.pyenv/versions/3.11.4/lib/python3.11/site-packages/azure/servicebus/_pyamqp/aio/_client_async.py", line 893, in _message_generator_async
+    receiving = await self.do_work_async()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/david/.pyenv/versions/3.11.4/lib/python3.11/site-packages/azure/servicebus/_pyamqp/aio/_client_async.py", line 354, in do_work_async
+    if not await self.client_ready_async():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/david/.pyenv/versions/3.11.4/lib/python3.11/site-packages/azure/servicebus/_pyamqp/aio/_client_async.py", line 331, in client_ready_async
+    if not await self.auth_complete_async():
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/david/.pyenv/versions/3.11.4/lib/python3.11/site-packages/azure/servicebus/_pyamqp/aio/_client_async.py", line 317, in auth_complete_async
+    if self._cbs_authenticator and not await self._cbs_authenticator.handle_token():
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/david/.pyenv/versions/3.11.4/lib/python3.11/site-packages/azure/servicebus/_pyamqp/aio/_cbs_async.py", line 258, in handle_token
+    raise TimeoutError("Authentication attempt timed-out.")
+TimeoutError: Authentication attempt timed-out.
+2024-01-08 05:29:29.966 | ERROR    | backend.service_bus:receive:51 - Handler failed: Authentication attempt timed-out..
+"""
         
 
 def parse_message(msg: ServiceBusReceivedMessage) -> Message:
